@@ -17,13 +17,17 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+		return View::make('pages.home');
+	}
+
+	public function showUser()
+	{
+		return View::make('pages.userProfile');
 	}
 
 	public function showLogin()
 	{
-		// show form
-		return View::make('login');
+		return View::make('pages.login');
 	}
 
 	public function doLogin()
@@ -62,7 +66,7 @@ class HomeController extends BaseController {
 			} else {
 
 				// validation not successful, send back to form
-				return Redirect::to('login');
+				return Redirect::to('pages.login');
 
 			}
 
@@ -72,7 +76,7 @@ class HomeController extends BaseController {
 	public function doLogout()
 	{
 		Auth::logout();
-		return Redirect::to('login');
+		return Redirect::to('pages.login');
 	}
 
 }

@@ -11,14 +11,23 @@
 |
 */
 
+// show a static view for the home page (app/views/home.blade.php)
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('pages.home');
 });
 
-// route to show the login form
+Route::get('userProfile', array('uses' => 'HomeController@showUser'));
+
 Route::get('login', array('uses' => 'HomeController@showLogin'));
 
 Route::post('login', array('uses' => 'HomeController@doLogin'));
 
 Route::get('logout', array('uses' => 'HomeController@doLogout'));
+
+App::missing(function($exception)
+{
+	return Response::view('error', array(), 404);
+});
+
+

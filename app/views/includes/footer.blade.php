@@ -1,0 +1,1 @@
+<div id="copyright test-right" class="text-center">© Copyright 2014 PhiloBay</div>

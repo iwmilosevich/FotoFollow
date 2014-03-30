@@ -10,20 +10,23 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-
-// show a static view for the home page (app/views/home.blade.php)
-Route::get('/', function()
-{
-	return View::make('pages.home');
-});
-
-Route::get('userProfile', array('uses' => 'HomeController@showUser'));
-
+Route::get('logout', array('uses' => 'HomeController@doLogout'));
 Route::get('login', array('uses' => 'HomeController@showLogin'));
-
 Route::post('login', array('uses' => 'HomeController@doLogin'));
 
-Route::get('logout', array('uses' => 'HomeController@doLogout'));
+// PROTECTED
+Route::group(array('before' => 'auth'), function()
+{
+   Route::get('/', array('uses' => 'HomeController@showHome'));
+   Route::get('userProfile', array('uses' => 'HomeController@showUser'));
+});
+
+// AUTH FILTER
+Route::filter('auth', function()
+{
+    if (Auth::guest()) return Redirect::to('login');
+});
+
 
 App::missing(function($exception)
 {

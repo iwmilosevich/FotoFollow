@@ -40,6 +40,36 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	}
 
 	/**
+	 * Get the Username for the user.
+	 *
+	 * @return string
+	 */
+	public function getUsername()
+	{
+		return $this->username;
+	}
+
+	/**
+	 * Get the Name for the user.
+	 *
+	 * @return string
+	 */
+	public function getName()
+	{
+		return $this->name;
+	}
+
+	/**
+	 * Get the Name for the user.
+	 *
+	 * @return string
+	 */
+	public function getPhone()
+	{
+		return $this->phone;
+	}
+
+	/**
 	 * Get the e-mail address where password reminders are sent.
 	 *
 	 * @return string
@@ -47,6 +77,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getReminderEmail()
 	{
 		return $this->email;
+	}
+
+	public function feeds() {
+		return $this->belongsToMany('Feed', 'users_feeds', 'user_id', 'feed_id');
 	}
 
 }

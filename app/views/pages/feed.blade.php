@@ -1,4 +1,4 @@
 @extends('layouts.feed')
 @section('content')
-	I am the Homepage
+	I am the Main Feed Page
 @stop

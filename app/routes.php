@@ -14,19 +14,12 @@ Route::get('logout', array('uses' => 'HomeController@doLogout'));
 Route::get('login', array('uses' => 'HomeController@showLogin'));
 Route::post('login', array('uses' => 'HomeController@doLogin'));
 
-// PROTECTED
 Route::group(array('before' => 'auth'), function()
 {
-   Route::get('/', array('uses' => 'HomeController@showHome'));
+   // Covered in the filters section as far as what the auth group does
+   Route::get('/', array('uses' => 'HomeController@showFeed'));
    Route::get('userProfile', array('uses' => 'HomeController@showUser'));
 });
-
-// AUTH FILTER
-Route::filter('auth', function()
-{
-    if (Auth::guest()) return Redirect::to('login');
-});
-
 
 App::missing(function($exception)
 {

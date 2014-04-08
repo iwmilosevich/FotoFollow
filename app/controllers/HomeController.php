@@ -15,9 +15,24 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showHome()
+	public function showFeed()
 	{
-		return View::make('pages.home');
+		return View::make('pages.feed');
+	}
+
+	public function showFeedProfile()
+	{
+		return View::make('pages.feedProfile');
+	}
+
+	public function showFeedCreate()
+	{
+		return View::make('pages.feedCreate');
+	}
+
+	public function showUploadPhoto()
+	{
+		return View::make('pages.uploadPhoto');
 	}
 
 	public function showUser()
@@ -58,9 +73,6 @@ class HomeController extends BaseController {
 			if (Auth::attempt($userdata)) {
 
 				// validation successful!
-				// redirect them to the secure section or whatever
-				// return Redirect::to('secure');
-				// for now we'll just echo success (even though echoing in a controller is bad)
 				return Redirect::to('/');
 
 			} else {

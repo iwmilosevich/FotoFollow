@@ -15,6 +15,7 @@ Route::get('logout', array('uses' => 'UserController@doLogout'));
 Route::get('login', array('uses' => 'UserController@showLogin'));
 Route::post('login', array('uses' => 'UserController@doLogin'));
 Route::get('home', array('uses' => 'BaseController@showHome'));
+Route::post('signUp', array('uses' => 'UserController@doSignUp'));
 
 
 Route::group(array('before' => 'auth'), function()

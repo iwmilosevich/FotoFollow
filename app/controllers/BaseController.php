@@ -7,6 +7,12 @@ class BaseController extends Controller {
 	 *
 	 * @return void
 	 */
+
+	public function showHome(){
+		return View::make('pages.home');
+	}
+
+
 	protected function setupLayout()
 	{
 		if ( ! is_null($this->layout))

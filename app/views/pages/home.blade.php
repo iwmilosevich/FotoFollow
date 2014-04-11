@@ -6,7 +6,7 @@
 
   <body>
 
-    @include('includes.header')
+    @include('includes.navbar')
 
     <div class="container">
       <div class="home-template">
@@ -16,7 +16,7 @@
             <p class="lead">FotoFollow is a helper app for SnapChat. It allows you to follow your friends, and
             express yourself. Don't get us wrong, we love SnapChat...but FotoFollow makes SnapChat better. Sign up
             today and see what we're talking about.</p>
-            <a class='btn btn-primary btn-lg'>Login</a>
+            <a class='btn btn-primary btn-lg' href="{{ URL::to('login') }}">Login</a>
           </div>
           <div class="col-md-5">
 

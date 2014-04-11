@@ -25,6 +25,11 @@ class UserController extends BaseController {
 		return View::make('pages.login');
 	}
 
+	public function showHome()
+	{
+		return View::make('pages.home');
+	}
+
 	public function doLogin()
 	{
 		// validate the info, create rules for the inputs

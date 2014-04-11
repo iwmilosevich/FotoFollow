@@ -14,16 +14,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="{{ URL::to('userProfile') }}">Profile</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Feeds <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Search Feed</a></li>
-            <li><a href="#">Create Feed</a></li>
-            <li><a href="#">Upload Photo</a></li>
-          </ul>
-        </li>
-    	<li><a href="{{ URL::to('logout') }}">Logout</a></li>
+        <li><a href="{{ URL::to('login') }}">Log In</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

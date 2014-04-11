@@ -10,9 +10,12 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
+
 Route::get('logout', array('uses' => 'UserController@doLogout'));
 Route::get('login', array('uses' => 'UserController@showLogin'));
 Route::post('login', array('uses' => 'UserController@doLogin'));
+Route::get('home', array('uses' => 'BaseController@showHome'));
+
 
 Route::group(array('before' => 'auth'), function()
 {

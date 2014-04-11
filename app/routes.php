@@ -23,6 +23,8 @@ Route::group(array('before' => 'auth'), function()
    Route::get('/', array('uses' => 'FeedController@showFeed'));
    Route::get('userProfile', array('uses' => 'UserController@showUser'));
    Route::get('feedCreate', array('uses' => 'FeedController@showFeedCreate'));
+   Route::get('feedProfile', array('uses' => 'FeedController@showFeedProfile'));
+   Route::get('uploadPhoto', array('uses' => 'FeedController@showUploadPhoto'));
 });
 
 App::missing(function($exception)
@@ -30,6 +32,4 @@ App::missing(function($exception)
 	return Response::view('error', array(), 404);
 });
 
-Route::resource('feeds', 'FeedController');
-
-
+Route::resource('feed','FeedController');

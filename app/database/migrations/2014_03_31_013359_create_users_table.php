@@ -17,10 +17,12 @@ class CreateUsersTable extends Migration {
 			$table->increments('id');
 
 			$table->string('name', 32);
+			$table->string('snapchatName', 64);
 			$table->string('username', 32);
 			$table->string('email', 320);
 			$table->string('password', 64);
 			$table->string('phone', 12);
+			$table->string('about');
 
 			$table->timestamps();
 		});

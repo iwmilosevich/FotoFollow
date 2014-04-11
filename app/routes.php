@@ -10,20 +10,23 @@
 | and give it the Closure to execute when that URI is requested.
 |
 */
-Route::get('logout', array('uses' => 'HomeController@doLogout'));
-Route::get('login', array('uses' => 'HomeController@showLogin'));
-Route::post('login', array('uses' => 'HomeController@doLogin'));
+Route::get('logout', array('uses' => 'UserController@doLogout'));
+Route::get('login', array('uses' => 'UserController@showLogin'));
+Route::post('login', array('uses' => 'UserController@doLogin'));
 
 Route::group(array('before' => 'auth'), function()
 {
    // Covered in the filters section as far as what the auth group does
-   Route::get('/', array('uses' => 'HomeController@showFeed'));
-   Route::get('userProfile', array('uses' => 'HomeController@showUser'));
+   Route::get('/', array('uses' => 'FeedController@showFeed'));
+   Route::get('userProfile', array('uses' => 'UserController@showUser'));
+   Route::get('feedCreate', array('uses' => 'FeedController@showFeedCreate'));
 });
 
 App::missing(function($exception)
 {
 	return Response::view('error', array(), 404);
 });
+
+Route::resource('feeds', 'FeedController');
 
 

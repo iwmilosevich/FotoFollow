@@ -1,6 +1,6 @@
 <?php
 
-class HomeController extends BaseController {
+class UserController extends BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -14,26 +14,6 @@ class HomeController extends BaseController {
 	|	Route::get('/', 'HomeController@showWelcome');
 	|
 	*/
-
-	public function showFeed()
-	{
-		return View::make('pages.feed');
-	}
-
-	public function showFeedProfile()
-	{
-		return View::make('pages.feedProfile');
-	}
-
-	public function showFeedCreate()
-	{
-		return View::make('pages.feedCreate');
-	}
-
-	public function showUploadPhoto()
-	{
-		return View::make('pages.uploadPhoto');
-	}
 
 	public function showUser()
 	{

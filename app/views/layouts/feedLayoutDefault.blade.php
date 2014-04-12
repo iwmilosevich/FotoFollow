@@ -22,6 +22,8 @@
 
 	</div>
 
+	@yield('feedList')
+
 	<footer class="row">
 		@include('includes.footer')
 	</footer>

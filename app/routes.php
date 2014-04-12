@@ -14,13 +14,14 @@
 Route::get('logout', array('uses' => 'UserController@doLogout'));
 Route::get('login', array('uses' => 'UserController@showLogin'));
 Route::post('login', array('uses' => 'UserController@doLogin'));
-Route::get('home', array('uses' => 'BaseController@showHome'));
+Route::get('/', array('uses' => 'BaseController@showHome'));
+Route::post('signUp', array('uses' => 'UserController@doSignUp'));
 
 
 Route::group(array('before' => 'auth'), function()
 {
    // Covered in the filters section as far as what the auth group does
-   Route::get('/', array('uses' => 'FeedController@showFeed'));
+   Route::get('home', array('uses' => 'FeedController@showFeed'));
    Route::get('userProfile', array('uses' => 'UserController@showUser'));
    Route::get('feedCreate', array('uses' => 'FeedController@showFeedCreate'));
    Route::get('feedProfile', array('uses' => 'FeedController@showFeedProfile'));

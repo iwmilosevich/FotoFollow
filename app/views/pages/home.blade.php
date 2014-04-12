@@ -19,9 +19,52 @@
             <a class='btn btn-primary btn-lg' href="{{ URL::to('login') }}">Login</a>
           </div>
           <div class="col-md-5">
+          {{ Form::open(['url' => 'signUp', 'method' => 'post', 'class' => 'clearfix']) }}
 
-           
+          <!-- if there are login errors, show them here -->
+          @if (Session::get('signUpError'))
+          <div class="alert alert-danger alert-dismissable">{{ Session::get('signUpError') }}</div>
+          @endif
 
+          @if ($errors->first('username'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('username') }}
+          </div>
+          @endif
+
+          @if ($errors->first('email'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('email') }}
+          </div>
+          @endif
+
+          @if ($errors->first('password'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('password') }}
+          </div>
+          @endif
+
+          @if ($errors->first('snapchatName'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('snapchatName') }}
+          </div>
+          @endif
+
+          @if ($errors->first('phone'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('phone') }}
+          </div>
+          @endif
+
+
+          <p>{{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Name')) }}</p>
+          <p>{{ Form::text('username', '', array('class' => 'form-control', 'placeholder' => 'Username')) }}</p>
+          <p>{{ Form::email('email', '', array('class' => 'form-control', 'placeholder' => 'Email')) }}</p>
+          <p>{{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}</p>
+          <p>{{ Form::text('snapchatName', '', array('class' => 'form-control', 'placeholder' => 'SnapChat Name')) }}</p>
+          <p>{{ Form::text('phone', '', array('class' => 'form-control', 'placeholder' => 'Phone Number')) }}</p>
+          <p>{{ Form::submit('Sign Up', array('class' => 'btn btn-primary')) }}</p> 
+        {{ Form::close() }}
           </div>
         </div>
       </div>

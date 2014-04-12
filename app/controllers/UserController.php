@@ -58,7 +58,7 @@ class UserController extends BaseController {
 			if (Auth::attempt($userdata)) {
 
 				// validation successful!
-				return Redirect::to('/');
+				return Redirect::to('home');
 
 			} else {
 
@@ -94,7 +94,7 @@ class UserController extends BaseController {
 
 		// if the validator fails, redirect back to the form
 		if ($validator->fails()) {
-			return Redirect::to('home')
+			return Redirect::to('/')
 				->withErrors($validator) // send back all errors to the login form
 				->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
 		} else {
@@ -105,12 +105,12 @@ class UserController extends BaseController {
 				'email' 	=> Input::get('email'),
 				'snapchatName' => Input::get('snapchatName'),
 				'username'	=>	Input::get('username'),
-				'password' 	=> Input::get('password'),
+				'password' 	=> Hash::Make(Input::get('password')),
 				'phone'	=> Input::get('phone')
 			);
 
 			$checkAuth = array(
-				'email' => Input::get('name'),
+				'email' => Input::get('email'),
 				'password' => Input::get('password')
 
 				);

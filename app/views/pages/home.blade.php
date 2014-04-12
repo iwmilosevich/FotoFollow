@@ -26,6 +26,12 @@
           <div class="alert alert-danger alert-dismissable">{{ Session::get('signUpError') }}</div>
           @endif
 
+          @if ($errors->first('username'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('username') }}
+          </div>
+          @endif
+
           @if ($errors->first('email'))
           <div class="alert alert-danger alert-dismissable">
             {{ $errors->first('email') }}
@@ -37,6 +43,19 @@
             {{ $errors->first('password') }}
           </div>
           @endif
+
+          @if ($errors->first('snapchatName'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('snapchatName') }}
+          </div>
+          @endif
+
+          @if ($errors->first('phone'))
+          <div class="alert alert-danger alert-dismissable">
+            {{ $errors->first('phone') }}
+          </div>
+          @endif
+
 
           <p>{{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Name')) }}</p>
           <p>{{ Form::text('username', '', array('class' => 'form-control', 'placeholder' => 'Username')) }}</p>

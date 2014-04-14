@@ -21,10 +21,8 @@ Route::post('signUp', array('uses' => 'UserController@doSignUp'));
 Route::group(array('before' => 'auth'), function()
 {
    // Covered in the filters section as far as what the auth group does
-   Route::get('home', array('uses' => 'FeedController@showFeed'));
+   Route::resource('feeds','FeedController');
    Route::get('userProfile', array('uses' => 'UserController@showUser'));
-   Route::get('feedCreate', array('uses' => 'FeedController@showFeedCreate'));
-   Route::get('feedProfile', array('uses' => 'FeedController@showFeedProfile'));
    Route::get('uploadPhoto', array('uses' => 'FeedController@showUploadPhoto'));
 });
 
@@ -32,5 +30,3 @@ App::missing(function($exception)
 {
 	return Response::view('error', array(), 404);
 });
-
-Route::resource('feed','FeedController');

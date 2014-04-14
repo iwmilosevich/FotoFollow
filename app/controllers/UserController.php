@@ -58,7 +58,7 @@ class UserController extends BaseController {
 			if (Auth::attempt($userdata)) {
 
 				// validation successful!
-				return Redirect::to('home');
+				return Redirect::to('feeds');
 
 			} else {
 

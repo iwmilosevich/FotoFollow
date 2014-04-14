@@ -11,10 +11,18 @@
 	</header>
 
 	<div id="main" class="row">
+		
+		<div id="sidebar" class="col-md-4">
+			@include('includes.sidebar')
+		</div>
 
+		<div id="content" class="col-md-8">
 			@yield('content')
+		</div>
 
 	</div>
+
+	@yield('feedCreate')
 
 	<footer class="row">
 		@include('includes.footer')

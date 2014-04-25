@@ -2,11 +2,6 @@
 
 class FeedController extends BaseController {
 
-	public function showUploadPhoto()
-	{
-		return View::make('pages.uploadPhoto');
-	}
-
 	/**
 	 * Index of all of the feeds
 	 *
@@ -103,7 +98,45 @@ class FeedController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		// delete feed. Need to add a confirmation modal or something to this
+		$feed = Feed::find($id);
+		$feed->delete();
+
+		Session::flash('message', 'Successfully deleted the nerd!');
+		return Redirect::to('feeds');		
+	}
+
+	public function showUploadPhoto()
+	{
+		return View::make('pages.uploadPhoto');
+	}
+
+	public function doUpload() 
+	{
+		$input = Input::all();
+
+		$rules = [
+			'image' => 'required|image'
+		];
+
+		$messages = [];
+		$validate = Validator::make($input, $rules, $messages);
+
+		if ($validate->passes()) {
+			$file = Input::file('image');
+			$destinationPath = 'uploads/images/';
+			$filename = $file->getClientOriginalName();
+			$mime_type = $file->getMimeType();
+			$extension = $file->getClientOriginalExtension();
+			$upload_success = $file->move($destinationPath, $filename);
+
+			// store data in db here
+			// send message using snapchat api here as well
+
+			return Redirect::back();
+		} else {
+			return Redirect::back()->withErrors($validate)->withInput();
+		}
 	}
 
 }

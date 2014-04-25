@@ -102,7 +102,7 @@ class FeedController extends BaseController {
 		$feed = Feed::find($id);
 		$feed->delete();
 
-		Session::flash('message', 'Successfully deleted the nerd!');
+		Session::flash('message', 'Successfully deleted the feed!');
 		return Redirect::to('feeds');		
 	}
 

@@ -24,6 +24,7 @@ Route::group(array('before' => 'auth'), function()
    Route::resource('feeds','FeedController');
    Route::get('userProfile', array('uses' => 'UserController@showUser'));
    Route::get('uploadPhoto', array('uses' => 'FeedController@showUploadPhoto'));
+   Route::post('uploadPhoto', array('uses' => 'FeedController@doUpload'));
 });
 
 App::missing(function($exception)

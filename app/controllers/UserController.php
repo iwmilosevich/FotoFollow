@@ -71,7 +71,6 @@ class UserController extends BaseController {
 				$userid = DB::table('users')
 					->where('email', $userdata['email'])
 					->pluck('id');
-				//Log::info('USERID INFO', array($userid));
 				Session::put('userid', $userid);
 				return Redirect::to('feeds');
 

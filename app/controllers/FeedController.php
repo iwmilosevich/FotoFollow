@@ -111,9 +111,10 @@ class FeedController extends BaseController {
 		return View::make('pages.uploadPhoto');
 	}
 
-	public function doUpload() 
+	public function doUpload($id) 
 	{
 		$input = Input::all();
+		$feed = Feed::find($id);
 
 		$rules = [
 			'image' => 'required|image'
@@ -137,6 +138,12 @@ class FeedController extends BaseController {
 		} else {
 			return Redirect::back()->withErrors($validate)->withInput();
 		}
+	}
+
+	public function doSubscription()
+	{
+		$user = User::all();
+		$feed = Feed::all();
 	}
 
 }

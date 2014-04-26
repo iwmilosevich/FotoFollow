@@ -15,9 +15,19 @@ class UserController extends BaseController {
 	|
 	*/
 
-	public function showUser()
+	public function showOtherUser($id)
 	{
-		return View::make('pages.userProfile');
+		$user = User::find($id);
+		return View::make('pages.userProfile')
+			->with('user', $user);
+	}
+
+	public function showMyUser()
+	{
+		$userid = Session::get('userid');
+		$user = User::find($userid);
+		return View::make('pages.userProfile')
+			->with('user', $user);
 	}
 
 	public function showLogin()
@@ -58,6 +68,11 @@ class UserController extends BaseController {
 			if (Auth::attempt($userdata)) {
 
 				// validation successful!
+				$userid = DB::table('users')
+					->where('email', $userdata['email'])
+					->pluck('id');
+				//Log::info('USERID INFO', array($userid));
+				Session::put('userid', $userid);
 				return Redirect::to('feeds');
 
 			} else {
@@ -72,6 +87,7 @@ class UserController extends BaseController {
 
 	public function doLogout()
 	{
+		Session::flush();
 		Auth::logout();
 		return Redirect::to('login');
 	}

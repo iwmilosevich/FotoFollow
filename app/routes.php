@@ -20,11 +20,12 @@ Route::post('signUp', array('uses' => 'UserController@doSignUp'));
 
 Route::group(array('before' => 'auth'), function()
 {
-   // Covered in the filters section as far as what the auth group does
-   Route::resource('feeds','FeedController');
-   Route::get('userProfile', array('uses' => 'UserController@showUser'));
-   Route::get('uploadPhoto', array('uses' => 'FeedController@showUploadPhoto'));
-   Route::post('uploadPhoto', array('uses' => 'FeedController@doUpload'));
+    // Covered in the filters section as far as what the auth group does
+    Route::resource('feeds','FeedController');
+    Route::get('userProfile/{id}', array('uses' => 'UserController@showOtherUser'));
+    Route::get('userProfile', array('uses' => 'UserController@showMyUser'));
+    Route::get('uploadPhoto', array('uses' => 'FeedController@showUploadPhoto'));
+    Route::post('uploadPhoto', array('uses' => 'FeedController@doUpload'));
 });
 
 App::missing(function($exception)

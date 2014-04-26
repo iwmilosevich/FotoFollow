@@ -49,6 +49,12 @@ class FeedController extends BaseController {
 			$feed->description = Input::get('description');
 			$feed->save();
 
+			// Add user as Moderator
+			$userid = Session::get('userid');
+			DB::table('moderators')->insert(
+				array('user_id' => $userid, 'feed_id' => $feed->id)
+			);
+
 			// redirect
 			Session::flash('message', 'Successfully created feed!');
 			return Redirect::to('feeds/' . $feed->id);
@@ -140,10 +146,13 @@ class FeedController extends BaseController {
 		}
 	}
 
-	public function doSubscription()
+	public function doSubscription($id)
 	{
-		$user = User::all();
-		$feed = Feed::all();
+		$userid = Session::get('userid');
+		DB::table('users_feeds')->insert(
+			array('user_id' => $userid, 'feed_id' => $id)
+		);
+		return Redirect::to('feeds');
 	}
 
 }

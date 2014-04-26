@@ -15,7 +15,9 @@
 			<td>{{ $value->description }}</td>
 
 			<td>
-				<a class="btn btn-small btn-success" href="#">Subscribe</a>
+				{{ Form::open(array('url' => 'subscribe/' . $value->id, 'class' => 'clearfix')) }}
+					{{ Form::submit('Subscribe', array('class' => 'btn btn-small btn-success')) }}
+				{{ Form::close() }}
 				<a class="btn btn-small btn-info" href="{{ URL::to('feeds/' . $value->id) }}">Profile</a>
 			</td>
 		</tr>

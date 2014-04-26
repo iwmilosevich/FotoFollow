@@ -3,7 +3,7 @@
  	<div class="jumbotron text-center">
 		<h2>{{ $user->username }}</h2>
 		<p>
-			<strong>Email:</strong> {{ $user->password }}
+			<strong>Email:</strong> {{ $user->email }}
 		</p>
 	</div>
 @stop

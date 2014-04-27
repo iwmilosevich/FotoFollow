@@ -126,6 +126,38 @@ class FeedController extends BaseController {
 			->with('subscribed', $subscribedFeeds);
 	}
 
+	public function sendMail($feed, $emailArray, $imagePath){
+
+		$mail = new PHPMailer;
+
+		$mail->SMTPAuth   = true;                  // enable SMTP authentication
+		$mail->SMTPSecure = "tls";                 // sets the prefix to the servier
+		$mail->Host       = "smtp.gmail.com";      // sets GMAIL as the SMTP server
+		$mail->Port       = 587;                   // set the SMTP port for the GMAIL server
+		$mail->Username   = "thefotofollow@gmail.com";  // GMAIL username
+		$mail->Password   = "fotofollowivanbrianfotofollow";            // GMAIL password
+
+		$mail->Subject    = "New Photo for feed ".$feed." ."
+		$body             = "Hello, Feed ".$feed." has uploaded a new photo";
+		$mail->AddAttachment($imagePath);
+		$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+
+		$mail->MsgHTML($body);
+
+		foreach ($emailArray as $value) {
+			$mail->AddAddress($value);
+		}
+
+		if(!$mail->Send()) {
+		  echo "Mailer Error: " . $mail->ErrorInfo;
+		  Log::error($mail->ErrorInfo);
+		} else {
+		  echo "Message sent!";
+		  Log::error('SENT MESSAGE NOOB');
+		}
+
+	}
+
 	public function doUpload() 
 	{
 		$input = Input::all();
@@ -138,6 +170,8 @@ class FeedController extends BaseController {
 		$messages = [];
 		$validate = Validator::make($input, $rules, $messages);
 
+		$user = User::find(Session::get('userid'));
+
 		if ($validate->passes()) {
 			$file = Input::file('image');
 			$destinationPath = 'uploads/feeds/' . $feedId .'/';
@@ -145,6 +179,8 @@ class FeedController extends BaseController {
 			$mime_type = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath, $filename);
+			
+			$this->sendMail();
 
 			$userid = Session::get('userid');
 			DB::table('photos')->insert(

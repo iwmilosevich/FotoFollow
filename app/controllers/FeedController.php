@@ -121,7 +121,7 @@ class FeedController extends BaseController {
 		$subscribedFeeds = DB::table('users_feeds')
 			->where('user_name', $user->username)
 			->orderBy('feed_name', 'asc')
-			->lists('feed_name','id');
+			->lists('feed_name','feed_id');
 		return View::make('pages.uploadPhoto')
 			->with('subscribed', $subscribedFeeds);
 	}
@@ -129,6 +129,7 @@ class FeedController extends BaseController {
 	public function doUpload() 
 	{
 		$input = Input::all();
+		$feedId = Input::get('subscribeFeed');
 
 		$rules = [
 			'image' => 'required|image'
@@ -139,16 +140,15 @@ class FeedController extends BaseController {
 
 		if ($validate->passes()) {
 			$file = Input::file('image');
-			$destinationPath = 'uploads/images/';
+			$destinationPath = 'uploads/feeds/' . $feedId .'/';
 			$filename = $file->getClientOriginalName();
 			$mime_type = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath, $filename);
 
-			// putting userid and pathname into db. Still need to have it coorespond to a feed. 
 			$userid = Session::get('userid');
 			DB::table('photos')->insert(
-				array('user_id' => $userid, 'pathName' => $destinationPath . $filename)
+				array('user_id' => $userid, 'feed_id' => $feedId, 'pathName' => $destinationPath . $filename)
 			);
 
 			// send message here

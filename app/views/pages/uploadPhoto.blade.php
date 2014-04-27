@@ -1,6 +1,7 @@
 @extends('layouts.feedLayoutDefault')
 @section('feedList')
 {{ Form::open(['url' => 'uploadPhoto', 'files' => true, 'method' => 'post', 'class' => 'clearfix']) }}
+{{ Form::select('subscribeFeed', $subscribed, Input::old('subscribeFeed')) }}
 <div class="form-group">
      <label class="col-sm-3 control-label">Image</label>
      <div class="col-sm-6">
@@ -11,5 +12,4 @@
 {{ Form::close() }}
 
 </br>
-@include('includes.feed-dropdown')
 @stop

@@ -14,7 +14,6 @@ class FotoFollowAppSeeder extends Seeder
 			'username' => 'Ivan.Milosevich',
 			'email'    => 'Ivan.Milosevich@Colorado.edu',
 			'password' => Hash::make('password'),
-			'phone'    => '970-420-9057',
 		));
 
 		$brian = User::create(array(
@@ -22,7 +21,6 @@ class FotoFollowAppSeeder extends Seeder
 			'username' => 'Brian.Phipps',
 			'email'    => 'Brian.Phipps@Colorado.edu',
 			'password' => Hash::make('password'),
-			'phone'    => '720-320-0574',
 		));
 
 		$this->command->info('Users Created');

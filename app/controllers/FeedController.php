@@ -137,15 +137,17 @@ class FeedController extends BaseController {
 		$mail->Username   = "thefotofollow@gmail.com";  // GMAIL username
 		$mail->Password   = "fotofollowivanbrianfotofollow";            // GMAIL password
 
-		$mail->Subject    = "New Photo for feed ".$feed." ."
+		$mail->Subject    = "New Photo for feed ".$feed." .";
 		$body             = "Hello, Feed ".$feed." has uploaded a new photo";
 		$mail->AddAttachment($imagePath);
 		$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
 
+		$mail->SetFrom('thefotofollow@gmail.com', 'FotoFollow');
 		$mail->MsgHTML($body);
+		$mail->AddAddress("thefotofollow@gmail.com");
 
 		foreach ($emailArray as $value) {
-			$mail->AddAddress($value);
+			$mail->AddBCC($value);
 		}
 
 		if(!$mail->Send()) {
@@ -179,8 +181,12 @@ class FeedController extends BaseController {
 			$mime_type = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath, $filename);
+
+			$row = DB::table('feed')->where('id', $feedId)->first();
+			$subscribedUsers = DB::table('users_feeds')->where('feed_id', $feedId)->lists('user_email');
+
 			
-			$this->sendMail();
+			$this->sendMail($row->feedName, $subscribedUsers, $destinationPath.$filename);
 
 			$userid = Session::get('userid');
 			DB::table('photos')->insert(

@@ -97,11 +97,8 @@ class UserController extends BaseController {
 		$rules = array(
 			'name'		 => 'required',
 			'email'    => 'required|email|unique:users,email', // make sure the email is an actual email
-			'snapchatName' => 'required|unique:users,snapchatName',
 			'username' => 'required|unique:users,username',
 			'password' => 'required|alphaNum|min:6', // password can only be alphanumeric and has to be greater than 3 characters
-			'phone'		 => 'required|digits:10'
-
 		);
 
 		// run the validation rules on the inputs from the form
@@ -118,10 +115,8 @@ class UserController extends BaseController {
 			$userdata = array(
 				'name'    => Input::get('name'),
 				'email' 	=> Input::get('email'),
-				'snapchatName' => Input::get('snapchatName'),
 				'username'	=>	Input::get('username'),
 				'password' 	=> Hash::Make(Input::get('password')),
-				'phone'	=> Input::get('phone')
 			);
 
 			$checkAuth = array(
@@ -136,7 +131,7 @@ class UserController extends BaseController {
 			if (Auth::attempt($checkAuth)) {
 
 				// validation successful!
-				return Redirect::to('/');
+				return Redirect::to('feeds');
 
 			} else {
 

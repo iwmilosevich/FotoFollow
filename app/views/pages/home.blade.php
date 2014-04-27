@@ -12,10 +12,8 @@
       <div class="home-template">
         <div class="row featurette">
           <div class="col-md-7">
-            <h2 class="featurette-heading">FotoFollow <span class="text-muted">The app for SnapChat.</span></h2>
-            <p class="lead">FotoFollow is a helper app for SnapChat. It allows you to follow your friends, and
-            express yourself. Don't get us wrong, we love SnapChat...but FotoFollow makes SnapChat better. Sign up
-            today and see what we're talking about.</p>
+            <h2 class="featurette-heading">FotoFollow <span class="text-muted">Follow your photos</span></h2>
+            <p class="lead">FotoFollow is a app about following your friends photos. </p>
             <a class='btn btn-primary btn-lg' href="{{ URL::to('login') }}">Login</a>
           </div>
           <div class="col-md-5">
@@ -44,25 +42,11 @@
           </div>
           @endif
 
-          @if ($errors->first('snapchatName'))
-          <div class="alert alert-danger alert-dismissable">
-            {{ $errors->first('snapchatName') }}
-          </div>
-          @endif
-
-          @if ($errors->first('phone'))
-          <div class="alert alert-danger alert-dismissable">
-            {{ $errors->first('phone') }}
-          </div>
-          @endif
-
 
           <p>{{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => 'Name')) }}</p>
           <p>{{ Form::text('username', '', array('class' => 'form-control', 'placeholder' => 'Username')) }}</p>
           <p>{{ Form::email('email', '', array('class' => 'form-control', 'placeholder' => 'Email')) }}</p>
           <p>{{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}</p>
-          <p>{{ Form::text('snapchatName', '', array('class' => 'form-control', 'placeholder' => 'SnapChat Name')) }}</p>
-          <p>{{ Form::text('phone', '', array('class' => 'form-control', 'placeholder' => 'Phone Number')) }}</p>
           <p>{{ Form::submit('Sign Up', array('class' => 'btn btn-primary')) }}</p> 
         {{ Form::close() }}
           </div>

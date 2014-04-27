@@ -11,7 +11,6 @@
 	</header>
 
 	<div id="main" class="row">
-		
 		<div id="sidebar" class="col-md-4">
 			@include('includes.sidebar')
 		</div>

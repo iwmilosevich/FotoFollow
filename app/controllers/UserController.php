@@ -127,8 +127,7 @@ class UserController extends BaseController {
 			$checkAuth = array(
 				'email' => Input::get('email'),
 				'password' => Input::get('password')
-
-				);
+			);
 
 			$id = DB::table('users')->insertGetId($userdata);
 

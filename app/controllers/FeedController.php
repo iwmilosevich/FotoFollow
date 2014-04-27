@@ -51,8 +51,10 @@ class FeedController extends BaseController {
 
 			// Add user as Moderator
 			$userid = Session::get('userid');
+			$user = User::find($userid);
 			DB::table('moderators')->insert(
-				array('user_id' => $userid, 'feed_id' => $feed->id)
+				array('user_id' => $userid, 'feed_id' => $feed->id, 
+					'feed_name' => $feed->feedName, 'user_name' => $user->username)
 			);
 
 			// redirect
@@ -114,13 +116,19 @@ class FeedController extends BaseController {
 
 	public function showUploadPhoto()
 	{
-		return View::make('pages.uploadPhoto');
+		$userid = Session::get('userid');
+		$user = User::find($userid);
+		$subscribedFeeds = DB::table('users_feeds')
+			->where('user_name', $user->username)
+			->orderBy('feed_name', 'asc')
+			->lists('feed_name','id');
+		return View::make('pages.uploadPhoto')
+			->with('subscribed', $subscribedFeeds);
 	}
 
-	public function doUpload($id) 
+	public function doUpload() 
 	{
 		$input = Input::all();
-		$feed = Feed::find($id);
 
 		$rules = [
 			'image' => 'required|image'
@@ -137,8 +145,13 @@ class FeedController extends BaseController {
 			$extension = $file->getClientOriginalExtension();
 			$upload_success = $file->move($destinationPath, $filename);
 
-			// store data in db here
-			// send message using snapchat api here as well
+			// putting userid and pathname into db. Still need to have it coorespond to a feed. 
+			$userid = Session::get('userid');
+			DB::table('photos')->insert(
+				array('user_id' => $userid, 'pathName' => $destinationPath . $filename)
+			);
+
+			// send message here
 
 			return Redirect::back();
 		} else {
@@ -149,8 +162,11 @@ class FeedController extends BaseController {
 	public function doSubscription($id)
 	{
 		$userid = Session::get('userid');
+		$feed = Feed::find($id);
+		$user = User::find($userid);
 		DB::table('users_feeds')->insert(
-			array('user_id' => $userid, 'feed_id' => $id)
+			array('user_id' => $userid, 'feed_id' => $id, 
+				'user_name' => $user->username, 'feed_name' => $feed->feedName)
 		);
 		return Redirect::to('feeds');
 	}

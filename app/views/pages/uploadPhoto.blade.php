@@ -9,4 +9,7 @@
 </div>
 {{ Form::submit('Upload', array('class' => 'btn btn-primary')) }}</p>	
 {{ Form::close() }}
+
+</br>
+@include('includes.feed-dropdown')
 @stop

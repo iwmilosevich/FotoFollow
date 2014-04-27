@@ -19,6 +19,7 @@ class CreateUsersFeedsTable extends Migration {
 			$table->integer('user_id');
 			$table->integer('feed_id');
 			$table->string('user_name');
+			$table->string('user_email');
 			$table->string('feed_name');
 
 			$table->timestamps();

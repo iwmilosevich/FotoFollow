@@ -166,7 +166,8 @@ class FeedController extends BaseController {
 		$user = User::find($userid);
 		DB::table('users_feeds')->insert(
 			array('user_id' => $userid, 'feed_id' => $id, 
-				'user_name' => $user->username, 'feed_name' => $feed->feedName)
+				'user_name' => $user->username, 'feed_name' => $feed->feedName,
+				'user_email' => $user->email)
 		);
 		return Redirect::to('feeds');
 	}

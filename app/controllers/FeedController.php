@@ -10,8 +10,11 @@ class FeedController extends BaseController {
 	public function index()
 	{
 		$feeds = Feed::all();
+		$subscriptions = DB::table('users_feeds')->where('user_id', Session::get('userid'))->lists('feed_id');
+
 		return View::make('pages.feed')
-			->with('feeds', $feeds);
+			->with('feeds', $feeds)
+			->with('sub', $subscriptions);
 	}
 
 
@@ -118,7 +121,7 @@ class FeedController extends BaseController {
 	{
 		$userid = Session::get('userid');
 		$user = User::find($userid);
-		$subscribedFeeds = DB::table('users_feeds')
+		$subscribedFeeds = DB::table('moderators')
 			->where('user_name', $user->username)
 			->orderBy('feed_name', 'asc')
 			->lists('feed_name','feed_id');
@@ -211,6 +214,15 @@ class FeedController extends BaseController {
 				'user_name' => $user->username, 'feed_name' => $feed->feedName,
 				'user_email' => $user->email)
 		);
+		return Redirect::to('feeds');
+	}
+
+	public function removeSubscription($id)
+	{
+		$userid = Session::get('userid');
+		$feed = Feed::find($id);
+		$user = User::find($userid);
+		DB::table('users_feeds')->where('user_id', '=', $userid)->where('feed_id', '=', $id)->delete();
 		return Redirect::to('feeds');
 	}
 

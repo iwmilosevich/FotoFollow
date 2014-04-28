@@ -27,6 +27,7 @@ Route::group(array('before' => 'auth'), function()
     Route::get('uploadPhoto', array('uses' => 'FeedController@showUploadPhoto'));
     Route::post('uploadPhoto', array('uses' => 'FeedController@doUpload'));
     Route::post('subscribe/{id}', array('uses' => 'FeedController@doSubscription'));
+    Route::post('unsubscribe/{id}', array('uses' => 'FeedController@removeSubscription'));
 });
 
 App::missing(function($exception)

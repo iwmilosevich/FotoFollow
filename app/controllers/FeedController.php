@@ -118,7 +118,7 @@ class FeedController extends BaseController {
 	{
 		$userid = Session::get('userid');
 		$user = User::find($userid);
-		$subscribedFeeds = DB::table('users_feeds')
+		$subscribedFeeds = DB::table('moderators')
 			->where('user_name', $user->username)
 			->orderBy('feed_name', 'asc')
 			->lists('feed_name','feed_id');

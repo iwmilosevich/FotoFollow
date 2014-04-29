@@ -75,8 +75,11 @@ class FeedController extends BaseController {
 	public function show($id)
 	{
 		$feed = Feed::find($id);
+		$feedPhotos = DB::table('photos')->where("feed_id", $id)->lists("pathName");
+
 		return View::make('pages.feedProfile')
-			->with('feed', $feed);
+			->with('feed', $feed)
+			->with('photos', $feedPhotos);
 	}
 
 	/**
@@ -179,7 +182,8 @@ class FeedController extends BaseController {
 
 		if ($validate->passes()) {
 			$file = Input::file('image');
-			$destinationPath = 'uploads/feeds/' . $feedId .'/';
+			$destinationDatabaseString = 'uploads/feeds/' . $feedId .'/';
+			$destinationPath = 'public/uploads/feeds/' . $feedId .'/';
 			$filename = $file->getClientOriginalName();
 			$mime_type = $file->getMimeType();
 			$extension = $file->getClientOriginalExtension();
@@ -193,7 +197,7 @@ class FeedController extends BaseController {
 
 			$userid = Session::get('userid');
 			DB::table('photos')->insert(
-				array('user_id' => $userid, 'feed_id' => $feedId, 'pathName' => $destinationPath . $filename)
+				array('user_id' => $userid, 'feed_id' => $feedId, 'pathName' => $destinationDatabaseString . $filename)
 			);
 
 			// send message here

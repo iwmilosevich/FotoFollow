@@ -28,12 +28,19 @@
 
 				<p>{{ Form::email('email', '', array('class' => 'form-control', 'placeholder' => 'Email')) }}</p>
 				<p>{{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}</p>
-				<a class="btn btn-success" href="{{ URL::to('/') }}">Back</a>
-				<p>{{ Form::submit('Login', array('class' => 'btn btn-primary')) }}</p>	
+				<div class="row">
+					<div class="col-md-2 col-md-offset-7">
+					<a class="btn btn-success" href="{{ URL::to('/') }}">Back</a>
+					</div>
+					<div class="col-md-1">
+					<p>{{ Form::submit('Login', array('class' => 'btn btn-primary')) }}</p>	
+					</div>
+				<div>
 			{{ Form::close() }}
 			</div>
 			<div class="col-md-4"></div>
 			</div>
+		</div>
 		</div>
 
 	<div class="footer">
